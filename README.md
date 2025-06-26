@@ -2,6 +2,8 @@ Writes a string to a QR Code and saves the code to a PNG file.
 
 Requires: `CMake` and `vcpkg` installed locally.
 
+Uses [libpng](https://github.com/pnggroup/libpng) and [QR-Code-generator](https://github.com/nayuki/QR-Code-generator/tree/master/cpp) as dependencies.
+
 Configuring with CMake (i.e):
 
 ```bash
@@ -19,3 +21,7 @@ Options:
   -o, --output   The output file name for the QR code SVG (required).
   -h, --help     Show this help message.
 ```
+
+#### Generated example:
+
+![Example for this repo URL](example.png)
