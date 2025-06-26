@@ -58,7 +58,6 @@ static bool save_qr_to_png(const qrcodegen::QrCode& qr,
 
   png_write_info(png, info);
 
-  // Allocate row buffer
   std::vector<png_byte> row_buffer(total_width);
 
   constexpr const png_byte BLACK = 0;    // Black pixel value
