@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.25)
+project(QRCodeGenerator)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(PNG REQUIRED)
+find_package(unofficial-nayuki-qr-code-generator REQUIRED)
+
+add_executable(qrgen src/main.cpp)
+
+target_link_libraries(qrgen PRIVATE
+    PNG::PNG
+    unofficial::nayuki-qr-code-generator::nayuki-qr-code-generator
+)
+
+target_compile_options(qrgen PRIVATE -Wall -Wextra -pedantic)
