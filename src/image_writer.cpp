@@ -17,21 +17,18 @@ bool image_writer::ImageWriter::save_qr_to_png() {
   png_structp png =
       png_create_write_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
   if (!png) {
-    fclose(file_ptr_);
     return false;
   }
 
   png_infop info = png_create_info_struct(png);
   if (!info) {
     png_destroy_write_struct(&png, nullptr);
-    fclose(file_ptr_);
     return false;
   }
 
   // clean-up iff libpng encounters an error
   if (setjmp(png_jmpbuf(png))) {
     png_destroy_write_struct(&png, &info);
-    fclose(file_ptr_);
     return false;
   }
 

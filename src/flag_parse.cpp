@@ -24,7 +24,7 @@ void print_usage(const std::string& prog_name) {
       << "  -s, --string   The string to encode in the QR code (required).\n"
       << "  -o, --output   The output file name for the QR code (required).\n"
       << "  -j, --jpeg     Output a JPEG file instead of a PNG.\n"
-      << " -s --scale <scale>  Scale factor for the QR code (default: 12).\n"
+      << "  -s --scale <scale>  Scale factor for the QR code (default: 12).\n"
       << "  -h, --help     Show this help message.\n";
 }
 
