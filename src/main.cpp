@@ -14,11 +14,11 @@ int main(int argc, char* argv[]) {
     const qrcodegen::QrCode qr_code = qrcodegen::QrCode::encodeText(
         opts.qr_string.c_str(), qrcodegen::QrCode::Ecc::MEDIUM);
 
-    image_writer::ImageWriter writer(opts.file_name, qr_code);
+    image_writer::ImageWriter writer(opts, qr_code);
 
     bool write_success = true;
 
-    if (opts.file_type == flags::FileType::PNG) {
+    if (opts.filetype == flags::FileType::PNG) {
       if (!writer.save_qr_to_png()) {
         write_success = false;
       }

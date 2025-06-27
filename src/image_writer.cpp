@@ -10,8 +10,8 @@ extern "C" {
 
 #include "image_writer.hpp"
 
-bool image_writer::ImageWriter::save_qr_to_png(int scale) {
-  set_dimensions(scale);
+bool image_writer::ImageWriter::save_qr_to_png() {
+  set_dimensions();
   open_file();
 
   png_structp png =
@@ -56,8 +56,8 @@ bool image_writer::ImageWriter::save_qr_to_png(int scale) {
           y >= dimensions_.border &&
           y < dimensions_.total_height - dimensions_.border) {
         // We're in the QR code area
-        int qr_x = (x - dimensions_.border) / scale;
-        int qr_y = (y - dimensions_.border) / scale;
+        int qr_x = (x - dimensions_.border) / dimensions_.scale;
+        int qr_y = (y - dimensions_.border) / dimensions_.scale;
 
         // false for light, true for dark.
         is_black = qr_.getModule(qr_x, qr_y);
@@ -74,8 +74,8 @@ bool image_writer::ImageWriter::save_qr_to_png(int scale) {
   return true;
 }
 
-bool image_writer::ImageWriter::save_qr_to_jpeg(int scale, int quality) {
-  set_dimensions(scale);
+bool image_writer::ImageWriter::save_qr_to_jpeg(int quality) {
+  set_dimensions();
   open_file();
 
   struct jpeg_compress_struct cinfo;
@@ -106,15 +106,14 @@ bool image_writer::ImageWriter::save_qr_to_jpeg(int scale, int quality) {
           x < dimensions_.total_width - dimensions_.border &&
           y >= dimensions_.border &&
           y < dimensions_.total_height - dimensions_.border) {
-        const int qr_x = (x - dimensions_.border) / scale;
-        const int qr_y = (y - dimensions_.border) / scale;
+        const int qr_x = (x - dimensions_.border) / dimensions_.scale;
+        const int qr_y = (y - dimensions_.border) / dimensions_.scale;
 
         is_black = qr_.getModule(qr_x, qr_y);
       }
 
       row_buffer[x] = is_black ? BLACK : WHITE;
     }
-
     jpeg_write_scanlines(&cinfo, row_pointer, 1);
   }
 

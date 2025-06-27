@@ -4,12 +4,15 @@
 #include <cstdlib>
 #include <qrcodegen.hpp>
 
+#include "flag_parse.hpp"
+
 namespace image_writer {
 class ImageWriter {
  public:
-  ImageWriter(const std::string& filename, const qrcodegen::QrCode& qr)
-      : filename_(filename), qr_(qr) {
-      }
+  ImageWriter(flags::ProgramOptions opts, const qrcodegen::QrCode& qr)
+      : filename_(opts.filename), qr_(qr) {
+    dimensions_.scale = opts.scale;
+  }
 
   ~ImageWriter() {
     if (file_ptr_) {
@@ -18,8 +21,8 @@ class ImageWriter {
   }
 
   std::string_view get_filename() const { return filename_; }
-  bool save_qr_to_png(int scale = 12);
-  bool save_qr_to_jpeg(int scale = 12, int quality = 95);
+  bool save_qr_to_png();
+  bool save_qr_to_jpeg(int quality = 95);
 
  private:
   struct QrImageDimensions {
@@ -40,13 +43,12 @@ class ImageWriter {
     }
   }
 
-  inline void set_dimensions(int scale) {
+  inline void set_dimensions() {
     const int size = qr_.getSize();
-    dimensions_.scale = scale;
-    dimensions_.width = size * scale;
-    dimensions_.height = size * scale;
+    dimensions_.width = size * dimensions_.scale;
+    dimensions_.height = size * dimensions_.scale;
     // 2 "modules" wide border around the actual QR code
-    dimensions_.border = 2 * scale;
+    dimensions_.border = 2 * dimensions_.scale;
     // width + the border on both sides
     dimensions_.total_width = dimensions_.width + 2 * dimensions_.border;
     // as above

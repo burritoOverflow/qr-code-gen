@@ -13,8 +13,9 @@ enum class FileType {
 
 struct ProgramOptions {
   std::string qr_string;
-  std::string file_name;
-  FileType file_type;
+  std::string filename;
+  FileType filetype = FileType::PNG;  // default file type
+  unsigned int scale = 12;            // default scale factor
 };
 
 void add_extension_if_missing(std::string& filename, const FileType filetype);
