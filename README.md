@@ -20,7 +20,7 @@ Options:
   -s, --string   The string to encode in the QR code (required).
   -o, --output   The output file name for the QR code (required).
   -j, --jpeg     Output a JPEG file instead of a PNG.
-  -s --scale <scale>  Scale factor for the QR code (default: 12).
+  -s  --scale    <scale>  Scale factor for the QR code (default: 12).
   -h, --help     Show this help message.
 ```
 
