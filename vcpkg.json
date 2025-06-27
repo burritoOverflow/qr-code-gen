@@ -1,6 +1,7 @@
 {
   "dependencies": [
     "libpng",
+    "libjpeg-turbo",
     "nayuki-qr-code-generator"
   ]
 }
