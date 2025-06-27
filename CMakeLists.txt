@@ -10,6 +10,7 @@ find_package(unofficial-nayuki-qr-code-generator REQUIRED)
 
 add_executable(qrgen
     src/image_writer.cpp
+    src/flag_parse.cpp
     src/main.cpp)
 
 target_include_directories(qrgen PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include")
